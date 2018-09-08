@@ -5,14 +5,15 @@ import { connect } from 'unistore/preact'
 import actions from './../actions'
 import { css } from 'emotion'
 
-export default connect('isLoggedIn, checkingLogin', actions)(
-  ({ isLoggedIn, checkingLogin, logout }) => (
-    <div className={container}>
-      {checkingLogin ? null : !isLoggedIn ? <LoginScreen /> : <Selector />}
-    </div>
-  )
-)
+export default connect(
+  'isLoggedIn, checkingLogin',
+  actions
+)(({ isLoggedIn, checkingLogin, logout }) => (
+  <div className={container}>
+    {checkingLogin ? null : !isLoggedIn ? <LoginScreen /> : <Selector />}
+  </div>
+))
 
 const container = css`
-  height: 100vh;
+  height: 100%;
 `

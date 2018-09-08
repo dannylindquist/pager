@@ -15,9 +15,18 @@ export default class App extends Component {
 
   render() {
     return (
-      <div id="app">
+      <div
+        id="app"
+        class={css`
+          height: 100%;
+        `}
+      >
         <Provider store={store}>
-          <div>
+          <div
+            class={css`
+              height: 100%;
+            `}
+          >
             <Header />
             <Router onChange={this.handleRoute}>
               <Viewer path="/" />

@@ -15,16 +15,25 @@ class LoginScreen extends Component {
   handleLogin = () => {
     let { email, password } = this.state
     this.setState({ password: '' })
+    localStorage.setItem('email', email)
     this.props.tryLogin(email, password)
   }
   handleSignup = () => {
     let { email, password } = this.state
     this.setState({ password: '' })
+    localStorage.setItem('email', email)
     this.props.trySignup(email, password)
   }
   handleKeyPress = e => {
     if (e.key === 'Enter') {
       this.handleLogin()
+    }
+  }
+  componentDidMount() {
+    var email = localStorage.getItem('email')
+    console.log(email)
+    if (email) {
+      this.setState({ email: email })
     }
   }
   render(props, { password }) {
@@ -33,12 +42,12 @@ class LoginScreen extends Component {
         <div className={content}>
           <h1
             css={`
-              color: palevioletred;
-              font-weight: 200;
+              color: rgba(255, 255, 255, 0.75);
+              font-weight: 400;
               font-size: 3em;
             `}
           >
-            Login
+            Pager
           </h1>
           <input
             className={inputs}
@@ -83,9 +92,11 @@ let content = css`
   width: 400px;
   align-self: flex-start;
   padding: 45px;
+  border-top: 2px solid palevioletred;
+  border-bottom: 2px solid paleturquoise;
+  border-left: 2px solid palegoldenrod;
+  border-right: 2px solid palegreen;
   border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.32);
-  box-shadow: 0px 1px 3px rgba(255, 255, 255, 0.33);
 `
 let inputs = css`
   display: block;
@@ -93,7 +104,7 @@ let inputs = css`
   margin: 10px 0;
   padding: 10px 10px;
   background: black;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.75);
   font-size: 16px;
   border: 1px solid rgba(255, 255, 255, 0.32);
   border-radius: 3px;

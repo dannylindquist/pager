@@ -3,6 +3,7 @@ import { connect } from 'unistore/preact'
 import { css } from 'emotion'
 import { route } from 'preact-router'
 import actions from './../actions'
+import fitty from 'fitty'
 
 class Display extends Component {
   state = {
@@ -25,15 +26,36 @@ class Display extends Component {
         this.setState({ index: 0 })
       }
     }, 5000)
+    this.fittyBox = fitty('#fittyBox', {
+      maxSize: 1000
+    })
+  }
+  componentDidUpdate() {
+    console.log('updated')
+    this.fittyBox = fitty('#fittyBox')
+    if (this.fittyBox && this.fittyBox.length >= 1) {
+      this.fittyBox[0].fit()
+    } else {
+      this.fittyBox = fitty('#fittyBox', {
+        maxSize: 1000
+      })
+    }
   }
   componentWillUnmount() {
     clearInterval(this.props.timer)
+    if (this.fittyBox && this.fittyBox.length >= 1) {
+      this.fittyBox[0].unsubscribe()
+    }
   }
   render = ({ numbers }, { index }) => (
     <div className={container}>
       {numbers &&
         numbers.length > 0 && (
-          <span className={styles}>{numbers[index].number.toUpperCase()}</span>
+          <div className={styles}>
+            <div className={fit} id="fittyBox">
+              {numbers[index].number.toUpperCase()}
+            </div>
+          </div>
         )}
     </div>
   )
@@ -44,12 +66,27 @@ export default connect(
   actions
 )(Display)
 
+const fit = css`
+  margin-top: -30px;
+  padding-top: 10px;
+`
+
 const styles = css`
-  font-size: 150px;
-  font-size: 40vw;
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: -50px;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 const container = css`
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  margin-top: 0;
 `

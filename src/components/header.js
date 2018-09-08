@@ -9,7 +9,16 @@ export default connect(
   'isControl,isDisplay,isLoggedIn',
   actions
 )(({ isControl, isDisplay, isLoggedIn, logout, clearView }) => (
-  <div className={navigation}>
+  <div
+    className={navigation}
+    style={
+      !isLoggedIn
+        ? 'display: none;'
+        : isDisplay
+          ? 'position: absolute; z-index: 99; color: rgba(255, 255, 255, 0.65);'
+          : ''
+    }
+  >
     <div className={lSeperator}>
       {isLoggedIn && (
         <button className={cButton} onClick={logout}>
@@ -22,7 +31,12 @@ export default connect(
         </button>
       )}
     </div>
-    <span className={title}>Pager</span>
+    <span
+      className={title}
+      style={isDisplay ? 'color: rgba(255, 255, 255, 0.55);' : ''}
+    >
+      Pager
+    </span>
     <div className={RSeperator} />
   </div>
 ))
@@ -53,13 +67,12 @@ let navigation = css`
 let cButton = css`
   font-size: 16px;
   background: black;
-  color: paleturquoise;
+  color: rgba(255, 255, 255, 0.65);
   padding: 5px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 2px;
+  border: none;
   :hover,
   :active {
-    border: 1px solid paleturquoise;
-    box-shadow: 0px 0px 1px paleturquoise;
+    color: paleturquoise;
+    text-decoration: underline;
   }
 `

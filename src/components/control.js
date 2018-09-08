@@ -46,7 +46,10 @@ class Control extends Component {
           <div className={entry} key={m.key}>
             <span>{m.number}</span>
             <button
-              className={clearButton}
+              className={css`
+                ${clearButton};
+                color: palevioletred;
+              `}
               onClick={this.removeNumber.bind(this, m.key)}
               style="float: right;"
             >
@@ -108,8 +111,17 @@ const entry = css`
   display: flex;
   align-items: center;
   margin-left: 10px;
+  position: relative;
   span {
     flex: 1 1 0%;
+  }
+  :before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: palegoldenrod;
+    height: 70%;
+    left: -4px;
   }
 `
 let form = css`

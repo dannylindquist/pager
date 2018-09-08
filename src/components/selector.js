@@ -20,6 +20,7 @@ export default connect(
 
 let selector = css`
   text-align: center;
+  height: 100%;
 `
 
 let sButton = css`
@@ -34,7 +35,7 @@ let sButton = css`
   background: black;
   color: palegreen;
   padding: 10px 20px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 2px solid rgba(255, 255, 255, 0.35);
   border-radius: 2px;
   :hover,
   :active {
